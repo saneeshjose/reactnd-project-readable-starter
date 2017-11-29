@@ -1,0 +1,132 @@
+.App {
+  text-align: center;
+}
+
+.App-header {
+  background-color: #5d5d6d;
+  height: 5em;
+  padding-left: 1em;
+  padding-top: 3em;
+  color: white;
+}
+
+.App-title {
+  font-size: 1.5em;
+  text-align: left;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.left-nav {
+  width: 18%;
+  background-color: #dedeef;
+  display: inline-block;
+  margin-top: 10px;
+  height: 40em;
+  vertical-align: top;
+}
+
+.center-frame {
+  width: 78%;
+  display: inline-block;
+  margin-top: 10px;
+  margin-left: 20px;
+}
+
+.categories {
+
+}
+
+.categories-list {
+  list-style: none;
+  padding-left: 0px;
+}
+
+.categories-list-item {
+  text-align: left;
+  font-size: 1.2em;
+  cursor: pointer;
+  margin: 10px;
+  background-color: #dddddd;
+  padding: 5px;
+  border-color: #cccccc;
+  border-style:solid;
+  border-left: none;
+  border-right: none;
+  margin-bottom: 0px;
+}
+
+.categories-list-item:hover {
+  font-weight: bold;
+}
+
+.categories-list-item:active {
+  font-weight: bold;
+}
+
+.posts {
+  background-color: #ffffff;
+}
+
+.posts-list {
+  list-style: none;
+}
+
+.posts-list-item {
+  text-align: left;
+  cursor: pointer;
+}
+
+.posts-list-item:hover {
+  font-weight: bold;
+}
+
+.post {
+  text-align: left;
+  margin-left: 0em;
+  margin-bottom: 8px;
+  border-radius: 4px;
+  border-width: 1px;
+  border-style: solid;
+  padding: 1em;
+  border-color: #cecede;
+}
+
+.post-title {
+  font-size: 1em;
+  color: #196fe0;
+}
+
+.post-body {
+  font-size: 0.85em;
+  margin-top: 8px;
+  color: #3e4346;
+}
+
+.post-attributes {
+  font-size: 0.8em;
+  margin-top:10px;
+  text-align: right;
+  color: black;
+}
+
+.post-attribute {
+  margin-right: 10px;
+}
+
+.menu-item-right {
+  text-align: right;
+  margin-right: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.btn-submit-post {
+  background-color: orange;
+  font-size: 1em;
+  padding: 10px;
+  color: #eeeeee;
+}
