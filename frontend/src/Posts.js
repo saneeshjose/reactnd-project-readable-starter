@@ -11,7 +11,7 @@ class Posts extends Component{
 		console.log('Rendering Posts : ' + this.props.selectedCategory );
 
 		const {posts, selectedCategory} = this.props;
-		const filteredPosts = selectedCategory ? posts.filter((p)=>p.category === selectedCategory ) : posts ;
+		const filteredPosts = selectedCategory === 'all' ? posts : posts.filter((p)=>p.category === selectedCategory );
 
 		return <div className="posts">
 			{filteredPosts.map((p)=><Post key={p.id} {...p}/>)}
