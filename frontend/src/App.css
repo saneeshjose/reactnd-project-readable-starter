@@ -59,6 +59,21 @@
   margin-bottom: 0px;
 }
 
+.categories-list-item-selected {
+  text-align: left;
+  font-size: 1.2em;
+  cursor: pointer;
+  margin: 10px;
+  background-color: #dddddd;
+  padding: 5px;
+  border-color: #cccccc;
+  border-style:solid;
+  border-left: none;
+  border-right: none;
+  margin-bottom: 0px;
+  font-weight: bold;
+}
+
 .categories-list-item:hover {
   font-weight: bold;
 }

@@ -8,9 +8,10 @@ import {categoryChangedAction} from './actions/uiselections';
 class Categories extends Component {
 
 	render() {
+		console.log('Rendering Categories');
 		return <div className="categories">
 			<ul className="categories-list">
-				{this.props.categories.map((c)=><li key={c.name} className="categories-list-item" onClick={()=>{
+				{this.props.categories.map((c)=><li key={c.name} className={this.props.selectedCategory === c.name ? "categories-list-item-selected" : "categories-list-item"} onClick={()=>{
 					this.setCategory(c);
 				}}>{capitalize(c.name)}</li>)}
 			</ul>
