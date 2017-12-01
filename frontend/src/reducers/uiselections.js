@@ -1,8 +1,6 @@
 import {CHANGE_CATEGORY} from '../actions/uiselections';
 
 export default function uiselections(state={}, action) {
-
-	console.log( 'Executing action :' + JSON.stringify(action));
 	switch(action.type) {
 
 		case CHANGE_CATEGORY:

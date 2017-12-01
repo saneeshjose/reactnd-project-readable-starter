@@ -24,3 +24,13 @@ export const getPosts = () =>
 export const getPostsByCategory = (name) =>
   fetch(`${api}/${name}/posts`, { headers })
     .then(res => res.json());
+
+export const submitPost = (post) =>
+  fetch(`${api}/posts`, {
+    method: 'POST',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(post)
+  }).then(res => res.json())

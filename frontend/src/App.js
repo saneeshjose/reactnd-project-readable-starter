@@ -18,9 +18,6 @@ class App extends Component {
         <div>
           <div className="left-nav"><Categories/></div>
           <div className="center-frame">
-            <div className="menu-item-right">
-              <button className="btn-submit-post">Submit Post</button>
-            </div>
             <Posts/>
           </div>
         </div>
