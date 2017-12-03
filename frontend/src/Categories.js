@@ -8,22 +8,34 @@ import {categoryChangedAction} from './actions/uiselections';
 
 class Categories extends Component {
 
-	render() {
-		console.log('Rendering Categories');
-		return <div className="categories">
-			{this.props.categories.map((c)=><Link key={c.name} to={`/${c.name}`}><div className="categories-list-item">{capitalize(c.name)}</div></Link>)}
-		</div>
+	state = {
+		selected : 'none'
 	}
 
-	setCategory = (c) => {
-		this.props.dispatch(categoryChangedAction(c.name));
+	changeCategory = (category) => {
+
+		this.setState({
+			selected : category
+		})
+	}
+
+	render() {
+		console.log('Rendering Categories : ' + this.state.selected);
+		return <div className="categories">
+			{this.props.categories.map((c)=><Link
+				key={c.name}
+				to={`/${c.name}`}
+				className={this.state.selected === c.name? "category-selected": "category"}
+				onClick={()=>this.changeCategory(c.name)}>{capitalize(c.name)}
+			</Link>)
+		}
+		</div>
 	}
 }
 
 
 const mapStateToProps = (state) =>({
-	categories : state.categories,
-	selectedCategory : state.uiselections.selectedCategory
+	categories : state.categories
 });
 
 export default connect(mapStateToProps)(Categories);

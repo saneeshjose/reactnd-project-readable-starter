@@ -52,8 +52,6 @@ export const submitVote = (id, option) =>
     body: JSON.stringify({option})
   }).then(res => res.json())
 
-
-
 export const postComment = (comment) =>
   fetch(`${api}/comments`, {
     method: 'POST',
@@ -64,3 +62,12 @@ export const postComment = (comment) =>
     body: JSON.stringify(comment)
   }).then(res => res.json())
 
+export const voteComment = (id, option) =>
+  fetch(`${api}/comments/${id}`, {
+    method: 'POST',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({option})
+  }).then(res => res.json())

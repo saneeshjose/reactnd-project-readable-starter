@@ -3,10 +3,10 @@
 }
 
 .App-header {
-  background-color: #5d5d6d;
-  height: 5em;
+  background-color: #337ab7;
   padding-left: 1em;
-  padding-top: 3em;
+  padding-top: 1em;
+  padding-bottom: 1em;
   color: white;
 }
 
@@ -22,7 +22,7 @@
 
 .left-nav {
   width: 18%;
-  background-color: #dedeef;
+  //background-color: #dedeef;
   display: inline-block;
   margin-top: 10px;
   height: 40em;
@@ -36,50 +36,40 @@
   margin-left: 20px;
 }
 
-.categories {
-
-}
-
 .categories-list {
   list-style: none;
   padding-left: 0px;
 }
 
-.categories-list-item {
+.category {
+  text-decoration: none;
+  display: block;
+  padding : 10px;
   text-align: left;
-  font-size: 1.2em;
-  cursor: pointer;
-  margin: 10px;
-  background-color: #dddddd;
-  padding: 5px;
-  border-color: #cccccc;
-  border-style:solid;
-  border-left: none;
-  border-right: none;
-  margin-bottom: 0px;
+  //background-color: #337ab7;
+  background-color: #2a9ee6;
+  color: white;
+  border-style: solid;
+  border-color: white;
+  border-radius: 8px;
 }
 
-.categories-list-item-selected {
+.category-selected {
+  text-decoration: none;
+  display: block;
+  padding : 10px;
   text-align: left;
-  font-size: 1.2em;
-  cursor: pointer;
-  margin: 10px;
-  background-color: #dddddd;
-  padding: 5px;
-  border-color: #cccccc;
-  border-style:solid;
-  border-left: none;
-  border-right: none;
-  margin-bottom: 0px;
+  color: white;
+  border-style: solid;
+  border-color: white;
+  border-radius: 8px;
   font-weight: bold;
+  background-color: #0080ef;
 }
 
-.categories-list-item:hover {
+.category:hover {
   font-weight: bold;
-}
-
-.categories-list-item:active {
-  font-weight: bold;
+  background-color: #1090ff;
 }
 
 .posts {
@@ -108,12 +98,13 @@
   border-style: solid;
   padding: 1em;
   border-color: #cecede;
+  display: block;
+  text-decoration: none;
 }
 
-/*.post:hover {
+.post:hover {
   background-color: #eeeeee;
-  cursor: pointer;
-}*/
+}
 
 .post-title {
   font-size: 1em;
@@ -210,7 +201,7 @@
   padding: 6px;
   text-align : left;
   margin-bottom: 10px;
-  font-size: 0.8em;
+  font-size: 0.9em;
   padding-left: 2em;
   //background-color: #eeeeee;
 
@@ -223,7 +214,7 @@
 }
 
 .comment-icon {
-  font-size: 1.1em;
+  font-size: 1.2em;
   margin-right: 1.8em;
 }
 
@@ -262,7 +253,6 @@
 
 .post-detail-vote {
   display: inline-block;
-  font-size: 2em;
   border-color: blue;
   //border-style: solid;
   width: 6%;
@@ -275,6 +265,7 @@
   border-color: green;
   padding-top: 0.3em;
   padding-bottom: 0.3em;
+  font-size: 1.8em;
 }
 
 .post-detail-details-row {
@@ -290,7 +281,7 @@
   display: inline-block;
   width: 92%;
   vertical-align: top;
-  padding-top: 1em;
+  padding-top: 1.8em;
   padding-left: 1em;
 }
 

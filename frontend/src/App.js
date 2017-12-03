@@ -13,7 +13,7 @@ class App extends Component {
         <div className="App-header">
           <div className="App-logo">
           </div>
-          <div className="App-title">Readable Project</div>
+          <div className="App-title">Readable</div>
         </div>
         <div>
           <div className="left-nav"><Categories/></div>

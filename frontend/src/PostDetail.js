@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import {capitalize} from 'capitalize';
+import capitalize from 'capitalize';
 import Loading from 'react-loading';
 import Moment from 'react-moment';
 
 import IconThumbsUp from 'react-icons/lib/fa/thumbs-o-up';
+import IconThumbsDown from 'react-icons/lib/fa/thumbs-o-down';
 import IconUser from 'react-icons/lib/fa/user';
 
 import * as ReadableAPI from './ReadableAPI';
@@ -14,7 +15,6 @@ import Comment from './Comment';
 class PostDetail extends Component {
 
 	state = {
-
 		post : {},
 		comments : []
 	}
@@ -63,6 +63,16 @@ class PostDetail extends Component {
 		})
 	}
 
+	downVote = () => {
+
+		const {id} = this.props.match.params;
+
+		ReadableAPI.submitVote(id,'downVote').then((response)=>{
+			console.log('Submitted vote');
+			this.setState({post:response});
+		})
+	}
+
 	render() {
 
 		console.log( this.state );
@@ -72,21 +82,36 @@ class PostDetail extends Component {
 		return <div>
 
 			{!this.state.post && <Loading delay={200} type='spin' color='#196fe0ba' width={72} height={72} /> }
-			{this.state.post &&
+			{this.state.post && this.state.post.id &&
 				<div className="post-detail">
 
 					<div className="post-detail-title">{title}</div>
 
 					<div className="post-detail-details-row">
 						<div className="post-detail-vote">
+							<IconThumbsUp onClick={this.upVote} style={
+								{
+									color : 'orange',
+									display : 'inline-block',
+									fontSize : '1.5em',
+									paddingBottom : '0.3em'
+								}
+							}/>
 							<div className="post-detail-votescore">{voteScore}</div>
-							<IconThumbsUp onClick={this.upVote}/>
+							<IconThumbsDown onClick={this.downVote} style={
+								{
+									color : 'grey',
+									display : 'inline-block',
+									fontSize : '1.5em',
+									paddingTop : '0.3em'
+								}
+							}/>
 						</div>
 						<div className="post-detail-body">{body}</div>
 					</div>
 
 					<div className="post-detail-options-row">
-						<div>Posted By <IconUser/><b>{author}</b>, <Moment fromNow>{new Date(timestamp)}</Moment> under <Link to={`/${category}`}>{category}</Link></div>
+						<div>Posted By <IconUser/><b>{author}</b>, <Moment fromNow>{new Date(timestamp)}</Moment> under <Link to={`/${category}`}>{capitalize(category)}</Link></div>
 					</div>
 
 					<div className="post-detail-comments">
