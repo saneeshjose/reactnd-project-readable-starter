@@ -40,7 +40,7 @@ class Posts extends Component{
 			title : this.state.title,
 			body : this.state.content,
 			author : this.state.user,
-			category : this.props.selectedCategory
+			category : this.props.match.params.category
 		}).then((response)=>{
 
 			//Once post is successful,add the post to store, dismiss loading, close modal
@@ -63,10 +63,12 @@ class Posts extends Component{
 
 	render() {
 
-		console.log('Rendering Posts : ' + this.props.selectedCategory );
+		const {posts} = this.props;
+		const {category} = this.props.match.params;
 
-		const {posts, selectedCategory} = this.props;
-		const filteredPosts = selectedCategory === 'all' ? posts : posts.filter((p)=>p.category === selectedCategory );
+		console.log('Rendering Posts : ' + category );
+
+		const filteredPosts = category === 'all' ? posts : posts.filter((p)=>p.category === category );
 
 		filteredPosts.sort((p1,p2)=>p1[this.state.sortBy]-p2[this.state.sortBy]);
 		this.state.sortOrder === 'desc' && filteredPosts.reverse();
@@ -107,8 +109,7 @@ class Posts extends Component{
 }
 
 const mapStateToProps = (state) =>({
-	posts : state.posts,
-	selectedCategory : state.uiselections.selectedCategory
+	posts : state.posts
 });
 
 export default connect(mapStateToProps)(Posts);

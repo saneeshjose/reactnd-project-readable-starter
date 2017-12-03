@@ -110,6 +110,11 @@
   border-color: #cecede;
 }
 
+/*.post:hover {
+  background-color: #eeeeee;
+  cursor: pointer;
+}*/
+
 .post-title {
   font-size: 1em;
   color: #196fe0;
@@ -174,4 +179,128 @@
   vertical-align: middle;
   margin-left: 5px;
   margin-right: 5px;
+}
+
+.post-detail {
+
+  padding: 2em;
+}
+.post-detail-title {
+  font-size: 1.3em;
+  color: #196fe0;
+  text-align: left;
+  margin-bottom: 1em;
+}
+
+
+
+.post-detail-comments {
+
+  margin-top: 3em;
+  background-color: #d3e8f5;
+  border-radius: 6px;
+
+}
+.post-detail-comment {
+
+  //border-style: solid;
+  //border-color: grey;
+  border-radius: 6px;
+  border-width: 2px;
+  padding: 6px;
+  text-align : left;
+  margin-bottom: 10px;
+  font-size: 0.8em;
+  padding-left: 2em;
+  //background-color: #eeeeee;
+
+}
+
+.comment-options {
+  padding-left: 3em;
+  padding-top : 1.2em;
+  vertical-align: middle;
+}
+
+.comment-icon {
+  font-size: 1.1em;
+  margin-right: 1.8em;
+}
+
+.comment-input-box {
+  width: 100%;
+  padding: 8px;
+  margin: 5px;
+}
+
+.comment-input {
+  width: 90%;
+  padding: 8px;
+  border-radius: 6px;
+  border-width: 1px;
+  border-color: grey;
+  margin: 5px;
+  font-size: 0.8em;
+  display: block;
+}
+
+.comment-post-button {
+  padding:10px;
+  border-radius: 6px;
+  background-color: #5bc0de;
+  font-size: 1em;
+  display: block;
+  margin: 5px;
+  width: 6em;
+}
+
+.comment-post-button-div {
+
+  text-align: left;
+  margin-left:
+}
+
+.post-detail-vote {
+  display: inline-block;
+  font-size: 2em;
+  border-color: blue;
+  //border-style: solid;
+  width: 6%;
+}
+
+.post-detail-votescore {
+  background-color: #ff7b06;
+  color: white;
+  //border-style: solid;
+  border-color: green;
+  padding-top: 0.3em;
+  padding-bottom: 0.3em;
+}
+
+.post-detail-details-row {
+  border-color: red;
+  //border-style: solid;
+}
+
+.post-detail-body {
+  font-size: 1em;
+  color: black;
+  text-align: left;
+  //border-style: solid;
+  display: inline-block;
+  width: 92%;
+  vertical-align: top;
+  padding-top: 1em;
+  padding-left: 1em;
+}
+
+.post-detail-options-row {
+  border-color: red;
+  //border-style: solid;
+  font-size: 0.8em;
+  color: #555555;
+  text-align: right;
+  line-height: 2em;
+  vertical-align: middle;
+  margin-right: 5em;
 }

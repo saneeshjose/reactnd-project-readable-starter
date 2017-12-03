@@ -16,6 +16,9 @@ export const getCategories = () =>
   fetch(`${api}/categories`, { headers })
     .then(res => res.json());
 
+export const getPost = (id) =>
+  fetch(`${api}/posts/${id}`, { headers })
+    .then(res => res.json());
 
 export const getPosts = () =>
   fetch(`${api}/posts`, { headers })
@@ -23,6 +26,10 @@ export const getPosts = () =>
 
 export const getPostsByCategory = (name) =>
   fetch(`${api}/${name}/posts`, { headers })
+    .then(res => res.json());
+
+export const getComments = (id) =>
+  fetch(`${api}/posts/${id}/comments`, { headers })
     .then(res => res.json());
 
 export const submitPost = (post) =>
@@ -34,3 +41,26 @@ export const submitPost = (post) =>
     },
     body: JSON.stringify(post)
   }).then(res => res.json())
+
+export const submitVote = (id, option) =>
+  fetch(`${api}/posts/${id}`, {
+    method: 'POST',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({option})
+  }).then(res => res.json())
+
+
+
+export const postComment = (comment) =>
+  fetch(`${api}/comments`, {
+    method: 'POST',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(comment)
+  }).then(res => res.json())
+
