@@ -68,7 +68,7 @@ class Posts extends Component{
 
 		console.log('Rendering Posts : ' + category );
 
-		const filteredPosts = category === 'all' ? posts : posts.filter((p)=>p.category === category );
+		const filteredPosts = !category? posts : posts.filter((p)=>p.category === category );
 
 		filteredPosts.sort((p1,p2)=>p1[this.state.sortBy]-p2[this.state.sortBy]);
 		this.state.sortOrder === 'desc' && filteredPosts.reverse();

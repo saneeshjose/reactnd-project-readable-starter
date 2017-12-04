@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Route} from 'react-router-dom';
+import {Route, Link} from 'react-router-dom';
 import Categories from './Categories';
 import Posts from './Posts';
 import PostDetail from './PostDetail';
@@ -13,11 +13,12 @@ class App extends Component {
         <div className="App-header">
           <div className="App-logo">
           </div>
-          <div className="App-title">Readable</div>
+          <Link className="App-title" to="/">Readable</Link>
         </div>
         <div>
           <div className="left-nav"><Categories/></div>
           <div className="center-frame">
+              <Route exact path="/" component={Posts}/>
               <Route exact path="/:category" component={Posts}/>
               <Route exact path="/postdetail/:id" component={PostDetail} />
           </div>

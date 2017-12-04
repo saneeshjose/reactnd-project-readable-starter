@@ -13,6 +13,13 @@
 .App-title {
   font-size: 1.5em;
   text-align: left;
+  display: block;
+  text-decoration: none;
+  color: white;
+}
+
+.App-title:hover {
+  font-weight: bold;
 }
 
 @keyframes App-logo-spin {

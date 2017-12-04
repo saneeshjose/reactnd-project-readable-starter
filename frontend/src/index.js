@@ -17,11 +17,9 @@ let posts = ReadableAPI.getPosts();
 
 Promise.all([categories,posts]).then((data)=>{
 
-	const defaultCategory = {name:'all'};
 	const store = createStore(rootReducer, {
-		categories : [defaultCategory].concat(data[0].categories),
-		posts:data[1],
-		uiselections : {selectedCategory:defaultCategory.name}
+		categories : data[0].categories,
+		posts:data[1]
 	});
 
 	ReactDOM.render(<Provider store={store}><BrowserRouter><App /></BrowserRouter></Provider>, document.getElementById('root'));
