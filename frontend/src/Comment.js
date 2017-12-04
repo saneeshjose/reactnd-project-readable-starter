@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 
 import {connect} from 'react-redux';
 import {updateComment} from './actions/comment';
+import {updatePost, decrementCommentCount} from './actions/post';
 
 import Moment from 'react-moment';
 
@@ -55,6 +56,11 @@ class Comment extends Component {
 	deleteComment = () => {
 		console.log('Deleting comment');
 		ReadableAPI.deleteComment(this.props.data.id).then( (comment)=> this.props.dispatch(updateComment(comment)) );
+
+		console.log(this.props.data);
+
+		//TODO : Use middleware to accomplish the same
+		this.props.dispatch(decrementCommentCount(this.props.data.parentId));
 	}
 
 	render() {

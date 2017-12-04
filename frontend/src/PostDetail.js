@@ -6,7 +6,7 @@ import Moment from 'react-moment';
 
 import {connect} from 'react-redux';
 
-import {updatePost} from './actions/post';
+import {updatePost, incrementCommentCount} from './actions/post';
 import {loadComments,addComment,updateComment} from './actions/comment';
 
 import IconThumbsUp from 'react-icons/lib/fa/thumbs-o-up';
@@ -38,6 +38,7 @@ class PostDetail extends Component {
 			this.commentInput.value = '';
 			this.commentUser.value='';
 			this.props.dispatch(addComment(comment));
+			this.props.dispatch(incrementCommentCount(id))
 		});
 	}
 
@@ -112,6 +113,7 @@ class PostDetail extends Component {
 }
 
 function mapStateToProps(state, props) {
+	console.log(state.comments);
 	return {
 		post : state.posts.find( (p) => p.id === props.match.params.id ),
 		comments : state.comments.filter( (c) => c.parentId === props.match.params.id )
