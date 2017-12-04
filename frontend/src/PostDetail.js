@@ -4,6 +4,11 @@ import capitalize from 'capitalize';
 import Loading from 'react-loading';
 import Moment from 'react-moment';
 
+import {connect} from 'react-redux';
+
+import {updatePost} from './actions/post';
+import {loadComments,addComment,updateComment} from './actions/comment';
+
 import IconThumbsUp from 'react-icons/lib/fa/thumbs-o-up';
 import IconThumbsDown from 'react-icons/lib/fa/thumbs-o-down';
 import IconUser from 'react-icons/lib/fa/user';
@@ -14,30 +19,14 @@ import Comment from './Comment';
 
 class PostDetail extends Component {
 
-	state = {
-		post : {},
-		comments : []
-	}
-
 	componentDidMount = () => {
-
-		const {id} = this.props.match.params;
-
-		let post = ReadableAPI.getPost(id);
-		let comments = ReadableAPI.getComments(id);
-
-		Promise.all([post,comments]).then( (data)=>{
-
-			this.setState ({
-				post : data[0],
-				comments : data[1]
-			});
-		} );
+		let comments = ReadableAPI.getComments(this.props.post.id).then((comments)=>{
+			this.props.dispatch(loadComments(comments));
+		});
 	}
 
 	postComment = () => {
-
-		const {id} = this.props.match.params;
+		const {id} = this.props.post;
 
 		ReadableAPI.postComment({
 			id : (new Date().getTime()).toString(36),
@@ -46,43 +35,36 @@ class PostDetail extends Component {
 			author : this.commentUser.value,
 			parentId : id
 		}).then((comment)=>{
-			console.log('Posted comment : ' + comment.body);
 			this.commentInput.value = '';
 			this.commentUser.value='';
-			this.setState((state)=>({comments : state.comments.concat([comment]) }));
+			this.props.dispatch(addComment(comment));
 		});
 	}
 
 	upVote = () => {
+		const {id} = this.props.post;
 
-		const {id} = this.props.match.params;
-
-		ReadableAPI.submitVote(id,'upVote').then((response)=>{
-			console.log('Submitted vote');
-			this.setState({post:response});
+		ReadableAPI.submitVote(id,'upVote').then((post)=>{
+			this.props.dispatch(updatePost(post));
 		})
 	}
 
 	downVote = () => {
+		const {id} = this.props.post;
 
-		const {id} = this.props.match.params;
-
-		ReadableAPI.submitVote(id,'downVote').then((response)=>{
-			console.log('Submitted vote');
-			this.setState({post:response});
+		ReadableAPI.submitVote(id,'downVote').then((post)=>{
+			this.props.dispatch(updatePost(post));
 		})
 	}
 
 	render() {
 
-		console.log( this.state );
-
-		const {id,title,body,author,category,commentCount,voteScore,timestamp} = this.state.post;
+		const {id,title,body,author,category,commentCount,voteScore,timestamp} = this.props.post;
 
 		return <div>
 
-			{!this.state.post && <Loading delay={200} type='spin' color='#196fe0ba' width={72} height={72} /> }
-			{this.state.post && this.state.post.id &&
+			{!this.props.post && <Loading delay={200} type='spin' color='#196fe0ba' width={72} height={72} /> }
+			{this.props.post && this.props.post.id &&
 				<div className="post-detail">
 
 					<div className="post-detail-title">{title}</div>
@@ -121,7 +103,7 @@ class PostDetail extends Component {
 							<button className="comment-post-button" onClick={this.postComment}>Post</button>
 						</div>
 
-						{this.state.comments.map((c)=><Comment key={c.id} {...c}/> ) }
+						{this.props.comments.map((c)=> !c.deleted && <Comment key={c.id} data={c}/> ) }
 					</div>
 				</div>
 			}
@@ -129,4 +111,11 @@ class PostDetail extends Component {
 	}
 }
 
-export default PostDetail;
+function mapStateToProps(state, props) {
+	return {
+		post : state.posts.find( (p) => p.id === props.match.params.id ),
+		comments : state.comments.filter( (c) => c.parentId === props.match.params.id )
+	}
+}
+
+export default connect(mapStateToProps)(PostDetail);

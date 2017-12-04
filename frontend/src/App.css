@@ -245,6 +245,26 @@
   width: 6em;
 }
 
+.comment-inline-edit {
+  width: 70%;
+  padding: 8px;
+  border-radius: 6px;
+  border-width: 1px;
+  border-color: grey;
+  margin: 5px;
+  font-size: 0.8em;
+  display: block;
+}
+
+.comment-inline-btn {
+  padding:6px;
+  border-radius: 6px;
+  font-size: 0.8em;
+  display: block;
+  margin: 5px;
+  width: 6em;
+}
+
 .comment-post-button-div {
 
   text-align: left;
