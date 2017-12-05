@@ -322,3 +322,12 @@
   vertical-align: middle;
   margin-right: 5em;
 }
+
+.post-detail-delete-btn {
+  background-color: #d9534f;
+  border-color: #d43f3a;
+  padding: 8px;
+  color: white;
+  font-size: 1em;
+  font-weight: bold;
+}

@@ -6,7 +6,7 @@ import Moment from 'react-moment';
 
 import {connect} from 'react-redux';
 
-import {updatePost, incrementCommentCount} from './actions/post';
+import {updatePost, incrementCommentCount, deletePost} from './actions/post';
 import {loadComments,addComment,updateComment} from './actions/comment';
 
 import IconThumbsUp from 'react-icons/lib/fa/thumbs-o-up';
@@ -18,6 +18,10 @@ import * as ReadableAPI from './ReadableAPI';
 import Comment from './Comment';
 
 class PostDetail extends Component {
+
+	state = {
+		deleting : false
+	}
 
 	componentDidMount = () => {
 		let comments = ReadableAPI.getComments(this.props.post.id).then((comments)=>{
@@ -58,6 +62,12 @@ class PostDetail extends Component {
 		})
 	}
 
+	deletePost = () => {
+		ReadableAPI.deletePost(this.props.post.id).then( (post) => {
+			this.props.dispatch(deletePost(post));
+		});
+	}
+
 	render() {
 
 		const {id,title,body,author,category,commentCount,voteScore,timestamp} = this.props.post;
@@ -95,6 +105,23 @@ class PostDetail extends Component {
 
 					<div className="post-detail-options-row">
 						<div>Posted By <IconUser/><b>{author}</b>, <Moment fromNow>{new Date(timestamp)}</Moment> under <Link to={`/${category}`}>{capitalize(category)}</Link></div>
+					</div>
+					<div className="post-detail-options-row">
+						{
+							!this.state.deleting && <button className="post-detail-delete-btn" onClick={()=>{
+								this.setState({deleting:true});
+							}}>Delete this Post</button>
+						}
+
+						{
+							this.state.deleting &&
+								<div>Are you sure?<Link to={`/${category}`}><button onClick={this.deletePost}>Yes</button></Link>
+								<button onClick={()=>{
+									this.setState({deleting:false});
+								}}>No</button>
+								</div>
+						}
+
 					</div>
 
 					<div className="post-detail-comments">
