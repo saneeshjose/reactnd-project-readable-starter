@@ -12,6 +12,7 @@ import {loadComments,addComment,updateComment} from './actions/comment';
 import IconThumbsUp from 'react-icons/lib/fa/thumbs-o-up';
 import IconThumbsDown from 'react-icons/lib/fa/thumbs-o-down';
 import IconUser from 'react-icons/lib/fa/user';
+import IconEdit from 'react-icons/lib/fa/pencil';
 
 import * as ReadableAPI from './ReadableAPI';
 
@@ -20,7 +21,9 @@ import Comment from './Comment';
 class PostDetail extends Component {
 
 	state = {
-		deleting : false
+		deleting : false,
+		editingTitle: false,
+		editingBody : false
 	}
 
 	componentDidMount = () => {
@@ -68,17 +71,50 @@ class PostDetail extends Component {
 		});
 	}
 
+	showEditTitleBox = () => {
+		this.setState({
+			editingTitle : true
+		})
+	}
+
+
+	showEditBodyBox = () => {
+		this.setState({
+			editingBody : true
+		})
+	}
+
+	updateTitle = () => {
+		ReadableAPI.updatePost(this.props.post.id, {title:this.titleInput.value}).then( post =>{
+			this.props.dispatch(updatePost(post));
+			this.setState({editingTitle:false})
+		})
+	}
+
+	updateBody = () => {
+		ReadableAPI.updatePost(this.props.post.id, {body:this.bodyInput.value}).then( post =>{
+			this.props.dispatch(updatePost(post));
+			this.setState({editingBody:false});
+		})
+	}
+
 	render() {
 
 		const {id,title,body,author,category,commentCount,voteScore,timestamp} = this.props.post;
 
+		console.log('Rendering PostDetail : ' + JSON.stringify(this.props.post));
 		return <div>
 
 			{!this.props.post && <Loading delay={200} type='spin' color='#196fe0ba' width={72} height={72} /> }
 			{this.props.post && this.props.post.id &&
 				<div className="post-detail">
 
-					<div className="post-detail-title">{title}</div>
+					{ !this.state.editingTitle && <div className="post-detail-title">{title} <IconEdit onClick={this.showEditTitleBox}/></div>}
+					{ this.state.editingTitle && <div className="post-detail-title">
+						<input type="text" className="post-detail-edit-title-input" defaultValue={title} ref={(txt)=>this.titleInput=txt}/>
+						<button className="update-btn" onClick={this.updateTitle}>Update</button>
+						</div>
+					}
 
 					<div className="post-detail-details-row">
 						<div className="post-detail-vote">
@@ -100,7 +136,13 @@ class PostDetail extends Component {
 								}
 							}/>
 						</div>
-						<div className="post-detail-body">{body}</div>
+
+						{ !this.state.editingBody && <div className="post-detail-body">{body} <IconEdit onClick={this.showEditBodyBox}/></div>}
+						{ this.state.editingBody && <div className="post-detail-body">
+							<textarea defaultValue={body} className="post-detail-edit-body-input" ref={(txt)=>this.bodyInput=txt}/>
+							<button className="update-btn" onClick={this.updateBody}>Update</button>
+						</div>}
+
 					</div>
 
 					<div className="post-detail-options-row">

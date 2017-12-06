@@ -158,11 +158,13 @@
 
 .form-input-control {
 
-  font-size: 1em;
+  font-size: 0.8em;
   border-radius: 6px;
   margin-bottom: 1em;
   padding : 6px;
   width: 100%;
+  border-color: #85c0e4;
+  border-width: 1px;
 }
 
 .form-button-control {
@@ -208,7 +210,7 @@
   padding: 6px;
   text-align : left;
   margin-bottom: 10px;
-  font-size: 0.9em;
+  font-size: 0.8em;
   padding-left: 2em;
   //background-color: #eeeeee;
 
@@ -220,9 +222,17 @@
   vertical-align: middle;
 }
 
-.comment-icon {
-  font-size: 1.2em;
+.comment-option {
+  font-size: 0.9em;
   margin-right: 1.8em;
+}
+
+.comment-option svg {
+  font-size: 1.5em;
+}
+
+.comment-option svg:hover {
+  color : blue;
 }
 
 .comment-input-box {
@@ -330,4 +340,36 @@
   color: white;
   font-size: 1em;
   font-weight: bold;
+}
+
+.post-detail-edit-title-input {
+  font-size: 1.3em;
+  color: #196fe0;
+  text-align: left;
+  margin-bottom: 1em;
+  border-radius: 5px;
+  padding: 10px;
+  border-width: 1px;
+  width: 80%;
+}
+
+.post-detail-edit-body-input {
+  font-size: 1em;
+  color: black;
+  text-align: left;
+  //border-style: solid;
+  display: inline-block;
+  width: 80%;
+  vertical-align: top;
+  border-radius: 6px;
+  padding: 5px;
+  border-color: grey;
+  border-width: 1px;
+}
+
+.update-btn {
+  padding: 8px;
+  border-radius: 6px;
+  margin-left: 1em;
+  vertical-align: top;
 }

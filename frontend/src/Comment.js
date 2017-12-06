@@ -81,9 +81,9 @@ class Comment extends Component {
 			</div> }
 
 			<div className="comment-options">
-				<span className="comment-icon" ><IconThumbsUp onClick={this.voteUp}/><IconThumbsDown onClick={this.voteDown}/> {this.props.data.voteScore}</span>
-				<span className="comment-icon" ><IconUser/> {this.props.data.author}</span>
-				<span className="comment-icon" >Last updated <Moment fromNow>{this.props.data.timestamp}</Moment></span>
+				<span className="comment-option" ><IconThumbsUp onClick={this.voteUp}/><IconThumbsDown onClick={this.voteDown}/> {this.props.data.voteScore}</span>
+				<span className="comment-option" ><IconUser/> {this.props.data.author}</span>
+				<span className="comment-option" >Last updated <Moment fromNow>{this.props.data.timestamp}</Moment></span>
 			</div>
 		</div>
 	}
