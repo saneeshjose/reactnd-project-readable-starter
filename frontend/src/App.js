@@ -20,7 +20,7 @@ class App extends Component {
           <div className="center-frame">
               <Route exact path="/" component={Posts}/>
               <Route exact path="/:category" component={Posts}/>
-              <Route exact path="/postdetail/:id" component={PostDetail} />
+              <Route exact path="/:category/:id" component={PostDetail} />
           </div>
         </div>
       </div>
