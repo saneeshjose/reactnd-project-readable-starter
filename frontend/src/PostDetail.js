@@ -131,6 +131,10 @@ class PostDetail extends Component {
 							<button className="comment-post-button" onClick={this.postComment}>Post</button>
 						</div>
 
+						<div style= {{
+							textAlign : 'left',
+							paddingLeft : '1.6em'
+						}}>{this.props.comments.length} comment{this.props.comments.length>1?'s':''} </div>
 						{this.props.comments.map((c)=> !c.deleted && <Comment key={c.id} data={c}/> ) }
 					</div>
 				</div>
