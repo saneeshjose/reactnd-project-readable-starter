@@ -3,15 +3,11 @@ import {connect} from 'react-redux';
 import {Link,withRouter} from 'react-router-dom';
 import capitalize from 'capitalize';
 
-import {categoryChangedAction} from './actions/uiselections';
-
-
 class Categories extends Component {
 
 	render() {
 
 		const {selectedCategory, categories} = this.props;
-
 		return <div className="categories">
 			{categories.map((c)=><Link
 				key={c.name}

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 
 import {connect} from 'react-redux';
 import {updateComment} from './actions/comment';
-import {updatePost, decrementCommentCount} from './actions/post';
+import {decrementCommentCount} from './actions/post';
 
 import Moment from 'react-moment';
 

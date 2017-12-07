@@ -8,9 +8,6 @@ import {
 
 export default function posts(state=[], action) {
 
-	console.log ('Executing post action :' + action.type);
-	console.log (action);
-
 	switch ( action.type ) {
 		case ADD_POST :
 			return state.concat([action.post]);

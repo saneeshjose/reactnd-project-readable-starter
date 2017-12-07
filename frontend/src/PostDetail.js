@@ -1,13 +1,12 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import capitalize from 'capitalize';
-import Loading from 'react-loading';
 import Moment from 'react-moment';
 
 import {connect} from 'react-redux';
 
 import {updatePost, incrementCommentCount, deletePost} from './actions/post';
-import {loadComments,addComment,updateComment} from './actions/comment';
+import {loadComments,addComment} from './actions/comment';
 
 import IconThumbsUp from 'react-icons/lib/fa/thumbs-o-up';
 import IconThumbsDown from 'react-icons/lib/fa/thumbs-o-down';
@@ -27,7 +26,7 @@ class PostDetail extends Component {
 	}
 
 	componentDidMount = () => {
-		let comments = ReadableAPI.getComments(this.props.post.id).then((comments)=>{
+		ReadableAPI.getComments(this.props.post.id).then((comments)=>{
 			this.props.dispatch(loadComments(comments));
 		});
 	}
@@ -100,17 +99,17 @@ class PostDetail extends Component {
 
 	render() {
 
-		const {id,title,body,author,category,commentCount,voteScore,timestamp} = this.props.post;
+		const {title,body,author,category	,voteScore,timestamp} = this.props.post;
+		const {comments} = this.props;
+		const {editingTitle, editingBody,deleting} = this.state;
 
-		console.log('Rendering PostDetail : ' + JSON.stringify(this.props.post));
 		return <div>
-
-			{!this.props.post && <Loading delay={200} type='spin' color='#196fe0ba' width={72} height={72} /> }
-			{this.props.post && this.props.post.id &&
+			{
 				<div className="post-detail">
 
-					{ !this.state.editingTitle && <div className="post-detail-title">{title} <IconEdit onClick={this.showEditTitleBox}/></div>}
-					{ this.state.editingTitle && <div className="post-detail-title">
+					{ !editingTitle && <div className="post-detail-title">{title} <IconEdit onClick={this.showEditTitleBox}/></div>}
+
+					{ editingTitle && <div className="post-detail-title">
 						<input type="text" className="post-detail-edit-title-input" defaultValue={title} ref={(txt)=>this.titleInput=txt}/>
 						<button className="update-btn" onClick={this.updateTitle}>Update</button>
 						</div>
@@ -137,8 +136,8 @@ class PostDetail extends Component {
 							}/>
 						</div>
 
-						{ !this.state.editingBody && <div className="post-detail-body">{body} <IconEdit onClick={this.showEditBodyBox}/></div>}
-						{ this.state.editingBody && <div className="post-detail-body">
+						{ !editingBody && <div className="post-detail-body">{body} <IconEdit onClick={this.showEditBodyBox}/></div>}
+						{ editingBody && <div className="post-detail-body">
 							<textarea defaultValue={body} className="post-detail-edit-body-input" ref={(txt)=>this.bodyInput=txt}/>
 							<button className="update-btn" onClick={this.updateBody}>Update</button>
 						</div>}
@@ -150,13 +149,13 @@ class PostDetail extends Component {
 					</div>
 					<div className="post-detail-options-row">
 						{
-							!this.state.deleting && <button className="post-detail-delete-btn" onClick={()=>{
+							!deleting && <button className="post-detail-delete-btn" onClick={()=>{
 								this.setState({deleting:true});
 							}}>Delete this Post</button>
 						}
 
 						{
-							this.state.deleting &&
+							deleting &&
 								<div>Are you sure?<Link to={`/${category}`}><button onClick={this.deletePost}>Yes</button></Link>
 								<button onClick={()=>{
 									this.setState({deleting:false});
@@ -176,8 +175,8 @@ class PostDetail extends Component {
 						<div style= {{
 							textAlign : 'left',
 							paddingLeft : '1.6em'
-						}}>{this.props.comments.length} comment{this.props.comments.length>1?'s':''} </div>
-						{this.props.comments.map((c)=> !c.deleted && <Comment key={c.id} data={c}/> ) }
+						}}>{comments.length} comment{comments.length>1?'s':''} </div>
+						{comments.map((c)=> !c.deleted && <Comment key={c.id} data={c}/> ) }
 					</div>
 				</div>
 			}
@@ -185,12 +184,9 @@ class PostDetail extends Component {
 	}
 }
 
-function mapStateToProps(state, props) {
-	console.log(state.comments);
-	return {
-		post : state.posts.find( (p) => p.id === props.match.params.id ),
-		comments : state.comments.filter( (c) => c.parentId === props.match.params.id )
-	}
-}
+const mapStateToProps = (state, props) => ({
+	post : state.posts.find( (p) => p.id === props.match.params.id ),
+	comments : state.comments.filter( (c) => c.parentId === props.match.params.id )
+});
 
 export default connect(mapStateToProps)(PostDetail);
