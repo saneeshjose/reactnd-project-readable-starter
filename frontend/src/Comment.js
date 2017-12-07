@@ -54,12 +54,7 @@ class Comment extends Component {
 	}
 
 	deleteComment = () => {
-		console.log('Deleting comment');
-		ReadableAPI.deleteComment(this.props.data.id).then( (comment)=> this.props.dispatch(updateComment(comment)) );
-
-		console.log(this.props.data);
-
-		//TODO : Use middleware to accomplish the same
+		ReadableAPI.deleteComment(this.props.data.id).then( (comment)=> this.props.dispatch(updateComment(comment)));
 		this.props.dispatch(decrementCommentCount(this.props.data.parentId));
 	}
 
