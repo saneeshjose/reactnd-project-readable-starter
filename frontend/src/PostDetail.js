@@ -99,9 +99,9 @@ class PostDetail extends Component {
 
 	render() {
 
-		const {title,body,author,category	,voteScore,timestamp} = this.props.post;
+		const {title,body,author,category,voteScore,timestamp} = this.props.post;
 		const {comments} = this.props;
-		const {editingTitle, editingBody,deleting} = this.state;
+		const {editingTitle,editingBody,deleting} = this.state;
 
 		return <div>
 			{
@@ -110,30 +110,16 @@ class PostDetail extends Component {
 					{ !editingTitle && <div className="post-detail-title">{title} <IconEdit onClick={this.showEditTitleBox}/></div>}
 
 					{ editingTitle && <div className="post-detail-title">
-						<input type="text" className="post-detail-edit-title-input" defaultValue={title} ref={(txt)=>this.titleInput=txt}/>
-						<button className="update-btn" onClick={this.updateTitle}>Update</button>
+							<input type="text" className="post-detail-edit-title-input" defaultValue={title} ref={(txt)=>this.titleInput=txt}/>
+							<button className="update-btn" onClick={this.updateTitle}>Update</button>
 						</div>
 					}
 
 					<div className="post-detail-details-row">
 						<div className="post-detail-vote">
-							<IconThumbsUp onClick={this.upVote} style={
-								{
-									color : 'orange',
-									display : 'inline-block',
-									fontSize : '1.5em',
-									paddingBottom : '0.3em'
-								}
-							}/>
+							<IconThumbsUp onClick={this.upVote} className="post-detail-vote-up"/>
 							<div className="post-detail-votescore">{voteScore}</div>
-							<IconThumbsDown onClick={this.downVote} style={
-								{
-									color : 'grey',
-									display : 'inline-block',
-									fontSize : '1.5em',
-									paddingTop : '0.3em'
-								}
-							}/>
+							<IconThumbsDown onClick={this.downVote} className="post-detail-vote-down"/>
 						</div>
 
 						{ !editingBody && <div className="post-detail-body">{body} <IconEdit onClick={this.showEditBodyBox}/></div>}
@@ -172,10 +158,7 @@ class PostDetail extends Component {
 							<button className="comment-post-button" onClick={this.postComment}>Post</button>
 						</div>
 
-						<div style= {{
-							textAlign : 'left',
-							paddingLeft : '1.6em'
-						}}>{comments.length} comment{comments.length>1?'s':''} </div>
+						<div className="post-detail-comments-header">{comments.length} comment{comments.length>1?'s':''} </div>
 						{comments.map((c)=> !c.deleted && <Comment key={c.id} data={c}/> ) }
 					</div>
 				</div>

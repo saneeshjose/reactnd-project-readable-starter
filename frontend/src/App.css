@@ -35,8 +35,6 @@
   margin-top: 1em;
   height: 40em;
   vertical-align: top;
-  border-color: red;
-  border-style: solid;
 }
 
 .center-frame {
@@ -44,8 +42,6 @@
   display: inline-block;
   margin-top: 1em;
   margin-left: 2em;
-  //border-color: red;
-  //border-style: solid;
 }
 
 /* Category nav styles */
@@ -80,7 +76,6 @@
 }
 
 /* Post styles */
-
 .menu-item-right {
   text-align: right;
   margin-right: 1em;
@@ -141,6 +136,13 @@
   margin-right: 0.8em;
 }
 
+.post-vote {
+  font-size: 1.2em;
+}
+
+.post-vote:hover {
+  font-size: 1.5em;
+}
 
 /* Create Post Form */
 .form-input-control {
@@ -193,10 +195,29 @@ select.form-input-control {
   margin-bottom: 1em;
 }
 
+.post-detail-vote-up {
+  color : orange;
+  display : inline-block;
+  font-size : 1.5em;
+  padding-bottom : 0.3em;
+}
+
+.post-detail-vote-down {
+  color : grey;
+  display : inline-block;
+  font-size : 1.5em;
+  padding-bottom : 0.3em;
+}
+
 .post-detail-comments {
   margin-top: 3em;
   background-color: #d3e8f5;
   border-radius: 6px;
+}
+
+.post-detail-comments-header {
+  text-align: left;
+  padding-left : 1.6em;
 }
 
 .post-detail-comment {
