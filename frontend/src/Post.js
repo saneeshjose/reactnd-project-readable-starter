@@ -1,8 +1,33 @@
- import React, {Component} from 'react';
- import {Link} from 'react-router-dom';
- import Moment from 'react-moment';
+import React, {Component} from 'react';
+import {Link,withRouter} from 'react-router-dom';
+import {connect} from 'react-redux';
+import Moment from 'react-moment';
+import IconThumbsUp from 'react-icons/lib/fa/thumbs-o-up';
+import IconThumbsDown from 'react-icons/lib/fa/thumbs-o-down';
+
+import * as ReadableAPI from './ReadableAPI';
+import  {updatePost} from './actions/post'
 
  class Post extends Component {
+
+ 	upVote = (e) => {
+
+ 		e.preventDefault();
+
+		const {id} = this.props;
+		ReadableAPI.submitVote(id,'upVote').then((post)=>{
+			this.props.dispatch(updatePost(post));
+		})
+	}
+
+	downVote = (e) => {
+		e.preventDefault();
+
+		const {id} = this.props;
+		ReadableAPI.submitVote(id,'downVote').then((post)=>{
+			this.props.dispatch(updatePost(post));
+		})
+	}
 
  	render() {
 
@@ -16,10 +41,12 @@
 			 			<span className="post-info">On: <Moment format="MM/DD/YY HH:MM">{timestamp}</Moment></span>
 			 			<span className="post-info">Category: {category}</span>
 			 			<span className="post-info">Comments: {commentCount}</span>
-			 			<span className="post-info">Votes: {voteScore}</span>
+			 			<span className="post-info">
+			 				<IconThumbsUp className="post-vote" onClick={this.upVote}/><IconThumbsDown className="post-vote" onClick={this.downVote}/>{voteScore}
+			 			</span>
 			 		</div>
  			</Link>
  	}
  }
 
- export default Post;
+ export default withRouter(connect()(Post));
