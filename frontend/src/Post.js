@@ -11,12 +11,12 @@
  		return <Link to={`/${category}/${id}`} className="post">
 		 			<div className="post-title">{title}</div>
 		 			<div className="post-body">{body}</div>
-		 			<div className="post-attributes">
-			 			<span className="post-attribute">Posted By: {author}</span>
-			 			<span className="post-attribute">On: <Moment format="MM/DD/YY HH:MM">{timestamp}</Moment></span>
-			 			<span className="post-attribute">Category: {category}</span>
-			 			<span className="post-attribute">Comments: {commentCount}</span>
-			 			<span className="post-attribute">Votes: {voteScore}</span>
+		 			<div className="post-info-row">
+			 			<span className="post-info">Posted By: {author}</span>
+			 			<span className="post-info">On: <Moment format="MM/DD/YY HH:MM">{timestamp}</Moment></span>
+			 			<span className="post-info">Category: {category}</span>
+			 			<span className="post-info">Comments: {commentCount}</span>
+			 			<span className="post-info">Votes: {voteScore}</span>
 			 		</div>
  			</Link>
  	}

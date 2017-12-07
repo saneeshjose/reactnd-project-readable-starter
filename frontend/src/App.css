@@ -1,3 +1,5 @@
+/* Styles common */
+
 .App {
   text-align: center;
 }
@@ -29,49 +31,34 @@
 
 .left-nav {
   width: 18%;
-  //background-color: #dedeef;
   display: inline-block;
-  margin-top: 10px;
+  margin-top: 1em;
   height: 40em;
   vertical-align: top;
+  border-color: red;
+  border-style: solid;
 }
 
 .center-frame {
   width: 78%;
   display: inline-block;
-  margin-top: 10px;
-  margin-left: 20px;
+  margin-top: 1em;
+  margin-left: 2em;
+  //border-color: red;
+  //border-style: solid;
 }
 
-.categories-list {
-  list-style: none;
-  padding-left: 0px;
-}
-
+/* Category nav styles */
 .category {
   text-decoration: none;
   display: block;
-  padding : 10px;
+  padding : 0.8em;
   text-align: left;
-  //background-color: #337ab7;
   background-color: #63b5e8;
   color: white;
   border-style: solid;
   border-color: white;
-  border-radius: 8px;
-}
-
-.category-selected {
-  text-decoration: none;
-  display: block;
-  padding : 10px;
-  text-align: left;
-  color: white;
-  border-style: solid;
-  border-color: white;
-  border-radius: 8px;
-  font-weight: bold;
-  background-color: #0080ef;
+  border-radius: 0.6em;
 }
 
 .category:hover {
@@ -79,28 +66,47 @@
   background-color: #1090ff;
 }
 
-.posts {
-  background-color: #ffffff;
-}
-
-.posts-list {
-  list-style: none;
-}
-
-.posts-list-item {
+.category-selected {
+  text-decoration: none;
+  display: block;
+  padding : 0.9em;
   text-align: left;
-  cursor: pointer;
+  color: white;
+  border-style: solid;
+  border-color: white;
+  border-radius: 0.6em;
+  font-weight: bold;
+  background-color: #0080ef;
 }
 
-.posts-list-item:hover {
+/* Post styles */
+
+.menu-item-right {
+  text-align: right;
+  margin-right: 1em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.btn-add-post {
+  background-color: orange;
+  border-color: orange;
+  font-size: 1em;
+  padding: 0.8em;
+  color: white;
+}
+
+.sort-panel {
+  text-align: left;
+  font-size: 0.8em;
+  margin-bottom: 0.8em;
   font-weight: bold;
 }
 
 .post {
   text-align: left;
-  margin-left: 0em;
-  margin-bottom: 8px;
-  border-radius: 4px;
+  margin-bottom: 1em;
+  border-radius: 0.5em;
   border-width: 1px;
   border-style: solid;
   padding: 1em;
@@ -119,45 +125,25 @@
 }
 
 .post-body {
-  font-size: 0.85em;
-  margin-top: 8px;
+  font-size: 0.9em;
+  margin-top: 0.7em;
   color: #3e4346;
 }
 
-.post-attributes {
+.post-info-row {
   font-size: 0.8em;
-  margin-top:10px;
+  margin-top: 0.9em;
   text-align: right;
   color: black;
 }
 
-.post-attribute {
-  margin-right: 10px;
+.post-info {
+  margin-right: 0.8em;
 }
 
-.menu-item-right {
-  text-align: right;
-  margin-right: 10px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
 
-.btn-submit-post {
-  background-color: orange;
-  font-size: 1em;
-  padding: 10px;
-  color: #eeeeee;
-}
-
-.sort-panel {
-  text-align: left;
-  font-size: 0.8em;
-  margin-bottom: 8px;
-  font-weight: bold;
-}
-
+/* Create Post Form */
 .form-input-control {
-
   font-size: 0.8em;
   border-radius: 6px;
   margin-bottom: 1em;
@@ -174,6 +160,20 @@
   padding : 6px;
 }
 
+textarea.form-input-control {
+  height: 8em;
+}
+
+select.form-input-control {
+  display: inline-block;
+  width: fit-content;
+}
+
+.submit-form span {
+  font-size: 0.8em;
+  font-weight: bold;
+}
+
 .loading-btn-class {
   display: inline-block;
   vertical-align: middle;
@@ -181,10 +181,11 @@
   margin-right: 5px;
 }
 
+/* Post Detail Styles */
 .post-detail {
-
   padding: 2em;
 }
+
 .post-detail-title {
   font-size: 1.3em;
   color: #196fe0;
@@ -192,19 +193,13 @@
   margin-bottom: 1em;
 }
 
-
-
 .post-detail-comments {
-
   margin-top: 3em;
   background-color: #d3e8f5;
   border-radius: 6px;
-
 }
-.post-detail-comment {
 
-  //border-style: solid;
-  //border-color: grey;
+.post-detail-comment {
   border-radius: 6px;
   border-width: 2px;
   padding: 6px;
@@ -212,8 +207,6 @@
   margin-bottom: 10px;
   font-size: 0.8em;
   padding-left: 2em;
-  //background-color: #eeeeee;
-
 }
 
 .comment-options {
@@ -283,7 +276,6 @@
 }
 
 .comment-post-button-div {
-
   text-align: left;
   margin-left:
 }
@@ -291,14 +283,12 @@
 .post-detail-vote {
   display: inline-block;
   border-color: blue;
-  //border-style: solid;
   width: 6%;
 }
 
 .post-detail-votescore {
   background-color: #ff7b06;
   color: white;
-  //border-style: solid;
   border-color: green;
   padding-top: 0.3em;
   padding-bottom: 0.3em;
@@ -307,14 +297,12 @@
 
 .post-detail-details-row {
   border-color: red;
-  //border-style: solid;
 }
 
 .post-detail-body {
   font-size: 1em;
   color: black;
   text-align: left;
-  //border-style: solid;
   display: inline-block;
   width: 92%;
   vertical-align: top;
@@ -324,7 +312,6 @@
 
 .post-detail-options-row {
   border-color: red;
-  //border-style: solid;
   font-size: 0.8em;
   color: #555555;
   text-align: right;
@@ -357,7 +344,6 @@
   font-size: 1em;
   color: black;
   text-align: left;
-  //border-style: solid;
   display: inline-block;
   width: 80%;
   vertical-align: top;
