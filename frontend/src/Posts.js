@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import Modal from 'react-modal';
 import Loading from 'react-loading';
@@ -20,8 +21,7 @@ class Posts extends Component{
 			loading : false,
 			title : '',
 			content : '',
-			user : '',
-			category : ''
+			user : ''
 		}
 	}
 
@@ -53,9 +53,10 @@ class Posts extends Component{
 			title : this.state.title,
 			body : this.state.content,
 			author : this.state.user,
-			category : this.state.category
+			category : this.selectInput.value
 		}).then((response)=>{
 
+			console.log(response);
 			//Once post is successful,add the post to store, dismiss loading, close modal
 			this.props.dispatch(addPost(response));
 			this.setState({
@@ -73,8 +74,7 @@ class Posts extends Component{
 
 	render() {
 
-		const {posts} = this.props;
-		const {category} = this.props.match.params;
+		const {posts, category} = this.props;
 
 		const filteredPosts = !category? posts : posts.filter((p)=>p.category === category );
 		filteredPosts.sort((p1,p2)=>p2[this.state.sortBy]-p1[this.state.sortBy]);
@@ -108,7 +108,7 @@ class Posts extends Component{
 
 				<div className="submit-form">
 					<div>
-						<span>Category</span> <select placeholder="Select a category" className="form-input-control" id='category' value={category} onChange={this.onFormInputChange}>
+						<span>Category</span> <select placeholder="Select a category" className="form-input-control" id='category' defaultValue={this.props.category} ref={(select)=>this.selectInput=select}>
 							{ this.props.categories.map( (c) => <option value={c.name} key={c.name}>{capitalize(c.name)}</option> ) }
 						</select>
 					</div>
@@ -125,9 +125,10 @@ class Posts extends Component{
 	}
 }
 
-const mapStateToProps = (state) =>({
+const mapStateToProps = (state, ownProps) =>({
 	posts : state.posts,
-	categories : state.categories
+	categories : state.categories,
+	category : ownProps.location.pathname.slice(1)
 });
 
-export default connect(mapStateToProps)(Posts);
+export default withRouter(connect(mapStateToProps)(Posts));
