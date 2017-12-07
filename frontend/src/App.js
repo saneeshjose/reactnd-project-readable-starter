@@ -16,7 +16,7 @@ class App extends Component {
           <Link className="App-title" to="/">Readable</Link>
         </div>
         <div>
-          <div className="left-nav"><Categories/></div>
+          <Route path="/" render={()=>(<div className="left-nav"><Categories/></div>)}/>
           <div className="center-frame">
               <Route exact path="/" component={Posts}/>
               <Route exact path="/:category" component={Posts}/>

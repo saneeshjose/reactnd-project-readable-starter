@@ -15,7 +15,6 @@ class Posts extends Component{
 		super ( props );
 
 		this.state = {
-			sortOrder : 'desc',
 			sortBy : 'voteScore',
 			modalShown : false,
 			loading : false,
@@ -35,8 +34,6 @@ class Posts extends Component{
 		//Show loading
 		this.setState({loading:true});
 
-		console.log(this.state);
-
 		//Post data to service
 		ReadableAPI.submitPost({
 			id : (new Date().getTime()).toString(36),
@@ -49,13 +46,10 @@ class Posts extends Component{
 
 			//Once post is successful,add the post to store, dismiss loading, close modal
 			this.props.dispatch(addPost(response));
-
-			setTimeout(()=>{
-				this.setState({
-					modalShown:false,
-					loading : false
-				})
-			},500);
+			this.setState({
+				modalShown:false,
+				loading : false
+			})
 		})
 	}
 
@@ -74,8 +68,7 @@ class Posts extends Component{
 
 		const filteredPosts = !category? posts : posts.filter((p)=>p.category === category );
 
-		filteredPosts.sort((p1,p2)=>p1[this.state.sortBy]-p2[this.state.sortBy]);
-		this.state.sortOrder === 'desc' && filteredPosts.reverse();
+		filteredPosts.sort((p1,p2)=>p2[this.state.sortBy]-p1[this.state.sortBy]);
 
 		return <div className="posts">
 
