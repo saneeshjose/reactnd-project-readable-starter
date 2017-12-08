@@ -80,7 +80,6 @@ class Posts extends Component{
 		filteredPosts.sort((p1,p2)=>p2[this.state.sortBy]-p1[this.state.sortBy]);
 
 		return <div>
-
 			<div className="menu-item-right">
               <button className="btn-add-post" onClick={()=>{
               	this.setState({modalShown:true});

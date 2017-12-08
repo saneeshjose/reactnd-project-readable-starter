@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Route, Link} from 'react-router-dom';
+import {Route, Link, Switch} from 'react-router-dom';
 import Categories from './Categories';
 import Posts from './Posts';
 import PostDetail from './PostDetail';
@@ -18,9 +18,10 @@ class App extends Component {
         <div>
           <Route path="/" render={()=>(<div className="left-nav"><Categories/></div>)}/>
           <div className="center-frame">
-              <Route exact path="/" component={Posts}/>
-              <Route exact path="/:category" component={Posts}/>
-              <Route exact path="/:category/:id" component={PostDetail} />
+            <Route exact path="/" component={Posts}/>
+            <Route exact path="/:category" component={Posts}/>
+            <Route exact path="/:category/:id" component={PostDetail} />
+            <Route exact path="/:category/:id/edit" component={PostDetail} />
           </div>
         </div>
       </div>

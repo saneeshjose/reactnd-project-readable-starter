@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import capitalize from 'capitalize';
 import Moment from 'react-moment';
+import ErrorPage from './ErrorPage';
 
 import {connect} from 'react-redux';
 
@@ -97,7 +98,17 @@ class PostDetail extends Component {
 		})
 	}
 
+	componentDidMount = ()=> {
+		this.props.editing && this.setState({
+			editingTitle: true,
+			editingBody : true
+		})
+	}
+
+	renderErrorPage = (error)=> <ErrorPage error={error}/>
 	render() {
+
+		if ( !this.props.post ) return this.renderErrorPage("Requested post not found!");
 
 		const {title,body,author,category,voteScore,timestamp} = this.props.post;
 		const {comments} = this.props;
@@ -167,9 +178,10 @@ class PostDetail extends Component {
 	}
 }
 
-const mapStateToProps = (state, props) => ({
-	post : state.posts.find( (p) => p.id === props.match.params.id ),
-	comments : state.comments.filter( (c) => c.parentId === props.match.params.id )
+const mapStateToProps = (state, ownProps) => ({
+	post : state.posts.find( (p) => p.id === ownProps.match.params.id ),
+	comments : state.comments.filter( (c) => c.parentId === ownProps.match.params.id ),
+	editing : ownProps.location.pathname.slice(1).includes("/edit")
 });
 
 export default connect(mapStateToProps)(PostDetail);
