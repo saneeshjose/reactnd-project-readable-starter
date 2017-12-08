@@ -4,7 +4,7 @@ import {
 	DELETE_POST,
 	INCREMENT_COMMENT_COUNT,
 	DECREMENT_COMMENT_COUNT
-} from '../actions/post'
+} from '../actions/types'
 
 export default function posts(state=[], action) {
 

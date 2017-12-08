@@ -2,7 +2,7 @@ import {
 	LOAD_COMMENTS,
 	ADD_COMMENT,
 	UPDATE_COMMENT
-} from '../actions/comment';
+} from '../actions/types';
 
 export default function comments(comments=[], action ) {
 

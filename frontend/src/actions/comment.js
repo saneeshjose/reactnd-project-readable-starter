@@ -1,6 +1,8 @@
-export const LOAD_COMMENTS = 'LOAD_COMMENTS';
-export const ADD_COMMENT = 'ADD_COMMENT';
-export const UPDATE_COMMENT = 'UPDATE_COMMENT';
+import {
+	LOAD_COMMENTS,
+	ADD_COMMENT,
+	UPDATE_COMMENT
+} from './types';
 
 export const loadComments = (comments)=>({
 	type : LOAD_COMMENTS,
