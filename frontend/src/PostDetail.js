@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
+import {Link,withRouter} from 'react-router-dom';
 import capitalize from 'capitalize';
 import Moment from 'react-moment';
 import ErrorPage from './ErrorPage';
@@ -27,7 +27,13 @@ class PostDetail extends Component {
 	}
 
 	componentDidMount = () => {
-		ReadableAPI.getComments(this.props.post.id).then((comments)=>{
+
+		this.props.editing && this.setState({
+			editingTitle: true,
+			editingBody : true
+		})
+
+		this.props.post && ReadableAPI.getComments(this.props.post.id).then((comments)=>{
 			this.props.dispatch(loadComments(comments));
 		});
 	}
@@ -98,21 +104,14 @@ class PostDetail extends Component {
 		})
 	}
 
-	componentDidMount = ()=> {
-		this.props.editing && this.setState({
-			editingTitle: true,
-			editingBody : true
-		})
-	}
-
 	renderErrorPage = (error)=> <ErrorPage error={error}/>
 	render() {
 
 		if ( !this.props.post ) return this.renderErrorPage("Requested post not found!");
 
 		const {title,body,author,category,voteScore,timestamp} = this.props.post;
-		const {comments} = this.props;
 		const {editingTitle,editingBody,deleting} = this.state;
+		const commentsShown = this.props.comments.filter((c)=>!c.deleted);
 
 		return <div>
 			{
@@ -169,8 +168,8 @@ class PostDetail extends Component {
 							<button className="comment-post-button" onClick={this.postComment}>Post</button>
 						</div>
 
-						<div className="post-detail-comments-header">{comments.length} comment{comments.length>1?'s':''} </div>
-						{comments.map((c)=> !c.deleted && <Comment key={c.id} data={c}/> ) }
+						<div className="post-detail-comments-header">{commentsShown.length} comment{commentsShown.length>1?'s':''} </div>
+						{commentsShown.map((c)=><Comment key={c.id} data={c}/> ) }
 					</div>
 				</div>
 			}
@@ -184,4 +183,4 @@ const mapStateToProps = (state, ownProps) => ({
 	editing : ownProps.location.pathname.slice(1).includes("/edit")
 });
 
-export default connect(mapStateToProps)(PostDetail);
+export default withRouter(connect(mapStateToProps)(PostDetail));

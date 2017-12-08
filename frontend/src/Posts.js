@@ -55,8 +55,6 @@ class Posts extends Component{
 			author : this.state.user,
 			category : this.selectInput.value
 		}).then((response)=>{
-
-			console.log(response);
 			//Once post is successful,add the post to store, dismiss loading, close modal
 			this.props.dispatch(addPost(response));
 			this.setState({
